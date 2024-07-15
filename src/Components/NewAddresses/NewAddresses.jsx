@@ -2,6 +2,7 @@ import { useState } from "react";
 import { addAddresses } from "../../DB/indexedDB";
 import style from "./NewAddresses.module.css";
 import AddButton from "../AddButton/AddButton";
+import WorkArea from "../WorkArea/WorkArea";
 
 const NewAddresses = () => {
 	const [address, setAddress] = useState("");
@@ -26,10 +27,10 @@ const NewAddresses = () => {
 				setStartDate("");
 				setWorkArea("");
 			} catch (error) {
-				console.error(error); //!TODO Add error component
+				console.error(error);
 			}
 		} else {
-			alert("Заполните поля: адрес и дата начала работ");
+			alert("Заполните поля: адрес и дата начала работ"); //!TODO Add error component
 		}
 	};
 
@@ -55,14 +56,7 @@ const NewAddresses = () => {
 						required
 					/>
 				</label>
-				<label>
-					<p>Площадь работ (м<sup>2</sup>):</p>
-					<input
-						type="text"
-						value={workArea}
-						onChange={(e) => setWorkArea(e.target.value)}
-					/>
-				</label>
+				<WorkArea value={workArea} onChange={(e) => setWorkArea(e.target.value)}/>
 				<AddButton onClick={handleSubmit}>Добавить адрес</AddButton>
 			</form>
 		</div>

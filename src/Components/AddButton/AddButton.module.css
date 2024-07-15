@@ -8,7 +8,7 @@
 	box-shadow: 0px 2px 4px rgb(45 35 66 / 40%),
 		0px 7px 13px -3px rgb(45 35 66 / 30%),
 		inset 0px -3px 0px rgb(58 65 111 / 50%);
-	padding: 0 32px;
+	padding: 0 15px;
 	border-radius: 6px;
 	color: #fff;
 	height: 48px;
@@ -18,13 +18,31 @@
 }
 
 .btn:hover {
-  box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
-  0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #3c4fe0;
-  transform: translateY(-2px);
+	box-shadow: 0px 4px 8px rgb(45 35 66 / 40%),
+		0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #3c4fe0;
+	transform: translateY(-2px);
 }
 
 .btn:active {
-  box-shadow: inset 0px 3px 7px #3c4fe0;
-  transform: translateY(2px);
+	box-shadow: inset 0px 3px 7px #3c4fe0;
+	transform: translateY(2px);
 }
 
+.btn__Nav {
+	color: black;
+	background: radial-gradient(100% 100% at 100% 0%, #b5c110 0%, #ffd154 100%);
+	box-shadow: 0px 2px 4px rgba(66, 61, 35, 0.4),
+		0px 7px 13px -3px rgba(66, 59, 35, 0.3),
+		inset 0px -3px 0px rgba(111, 84, 58, 0.5);
+}
+
+.btn__Nav:hover {
+	box-shadow: 0px 4px 8px rgba(66, 52, 35, 0.4),
+		0px 7px 13px -3px rgba(66, 54, 35, 0.3), inset 0px -3px 0px #e0ac3c;
+	transform: translateY(-2px);
+}
+
+.btn__Nav:active {
+	box-shadow: inset 0px 3px 7px #e0a73c;
+	transform: translateY(2px);
+}

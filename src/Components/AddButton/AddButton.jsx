@@ -1,17 +1,11 @@
-import PropTypes from 'prop-types';
 import style from './AddButton.module.css'
 
-const AddButton = ({onClick, children}) => {
+const AddButton = ({onClick, children, className}) => {
   return (
-    <button className={`${style.btn} ${style.addAddressBtn}`} onClick={onClick}>
+    <button className={`${style.btn} ${className ? `${className}` : ''}`} onClick={onClick}>
       {children}
     </button>
   )
 }
-
-AddButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
 
 export default AddButton
