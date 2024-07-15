@@ -1,11 +1,12 @@
-import './App.css'
+import NewAddresses from "../NewAdresses/NewAddresses";
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-    </>
-  )
+	return (
+		<>
+			<NewAddresses />
+		</>
+	);
 }
 
-export default App
+export default App;
