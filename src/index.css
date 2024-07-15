@@ -1,5 +1,15 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	background-image: linear-gradient(
+		to bottom right,
+		rgb(88, 186, 239),
+		rgb(184, 38, 189)
+	);
+	background-attachment: fixed;
 }

@@ -1,11 +1,12 @@
 import NewAddresses from "../NewAdresses/NewAddresses";
-import "./App.css";
+import Wrapper from "../Wrapper/Wrapper";
+import "./App.module.css";
 
 function App() {
 	return (
-		<>
+		<Wrapper>
 			<NewAddresses />
-		</>
+		</Wrapper>
 	);
 }
 
