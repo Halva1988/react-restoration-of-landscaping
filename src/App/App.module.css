@@ -1,15 +1,27 @@
-
-
 h1 {
-  text-align: center;
+	text-align: center;
 }
 
 ul {
-  padding: 20px;
+	padding: 20px;
 }
 
 .nav {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+.activeLink {
+	color: #090808;
+	background: radial-gradient(100% 100% at 100% 0%, #e97b36 0%, #d15b12 100%);
+	box-shadow: 0px 2px 4px rgba(66, 61, 35, 0.4),
+  0px 7px 13px -3px rgba(66, 59, 35, 0.3),
+  inset 0px -3px 0px rgba(111, 84, 58, 0.5);
+}
+
+.activeLink:hover {
+	box-shadow: 0px 4px 8px rgba(66, 52, 35, 0.4),
+		0px 7px 13px -3px rgba(66, 54, 35, 0.3), inset 0px -3px 0px #e0733c;
+	transform: translateY(-2px);
 }

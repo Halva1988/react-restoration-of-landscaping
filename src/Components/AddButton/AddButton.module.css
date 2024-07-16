@@ -29,6 +29,7 @@
 }
 
 .btn__Nav {
+	color: #302f2f;
 	display: flex;
 	background: radial-gradient(100% 100% at 100% 0%, #b5c110 0%, #ffd154 100%);
 	box-shadow: 0px 2px 4px rgba(66, 61, 35, 0.4),

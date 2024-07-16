@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addAddresses } from "../../DB/indexedDB";
 import style from "./NewAddresses.module.css";
 import AddButton from "../../Components/AddButton/AddButton";
@@ -8,6 +9,8 @@ const NewAddresses = () => {
 	const [address, setAddress] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [workArea, setWorkArea] = useState("");
+	const [inProgress, setInProgress] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -22,10 +25,12 @@ const NewAddresses = () => {
 
 		if (address && startDate) {
 			try {
-				await addAddresses({ address, startDate, workArea });
+				await addAddresses({ address, startDate, workArea, inProgress });
 				setAddress("");
 				setStartDate("");
 				setWorkArea("");
+				setInProgress(false);
+				navigate("/")
 			} catch (error) {
 				console.error(error);
 			}
