@@ -1,5 +1,4 @@
 
-
 const WorkArea = ({value, onChange}) => {
 
   return (

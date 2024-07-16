@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { addAddresses } from "../../DB/indexedDB";
 import style from "./NewAddresses.module.css";
-import AddButton from "../AddButton/AddButton";
-import WorkArea from "../WorkArea/WorkArea";
+import AddButton from "../../Components/AddButton/AddButton";
+import WorkArea from "../../Components/WorkArea/WorkArea";
 
 const NewAddresses = () => {
 	const [address, setAddress] = useState("");

@@ -13,3 +13,18 @@ body {
 	);
 	background-attachment: fixed;
 }
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	display: flex;
+	align-items: center;
+}
+
+a {
+	color: white;
+	font-size: 1.2em;
+	text-decoration: none;
+}

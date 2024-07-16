@@ -1,4 +1,4 @@
-import style from './AddButton.module.css'
+import style from './AddButton.module.css';
 
 const AddButton = ({onClick, children, className}) => {
   return (
