@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getAddresses } from "../../DB/indexedDB";
 import Wrapper from "../../Components/Wrapper/Wrapper";
 import style from "./AllAddresses.module.css";
@@ -26,18 +27,25 @@ const AllAddresses = () => {
 						<th>
 							Площадь работ (м<sup>2</sup>)
 						</th>
-						<th>
-							Выполнение
-						</th>
+						<th>Выполнение</th>
 					</tr>
 				</thead>
 				<tbody>
 					{addressee.map((address) => (
 						<tr key={address.id}>
-							<td>{address.address}</td>
+							<td>
+								<Link to={`/addresses/${address.id}`}>
+									{address.locationAddress}
+								</Link>
+								{address.mapLink && (
+									<a href={address.mapLink} target="_blank">
+										Открыть на карте
+									</a>
+								)}
+							</td>
 							<td>{address.startDate}</td>
 							<td>{address.workArea}</td>
-              <td>{address.inProgress ? "Завершено" : "В процессе"}</td>
+							<td>{address.inProgress ? "Завершено" : "В процессе"}</td>
 						</tr>
 					))}
 				</tbody>

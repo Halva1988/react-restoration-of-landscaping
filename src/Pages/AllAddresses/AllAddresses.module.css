@@ -7,7 +7,6 @@
 .table thead th {
   font-weight: bold;
   text-align: center;
-  /* border: none; */
   padding: 10px 15px;
   background: #EDEDED;
   font-size: 1.2rem;
@@ -58,4 +57,11 @@
 
 .table tbody tr:last-child td:last-child {
   border-radius: 0 0 20px 0;
+}
+
+td a + a {
+  display: inline-block;
+  margin-top: 5px;
+  color: #0064ff;
+  font-size: 14px;
 }

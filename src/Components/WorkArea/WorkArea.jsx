@@ -5,9 +5,10 @@ const WorkArea = ({value, onChange}) => {
     <label>
       <p>Площадь работ (м<sup>2</sup>):</p>
       <input
-        type="text"
+        type="number"
         value={value}
         onChange={onChange}
+        min="1"
       />
     </label>
   )

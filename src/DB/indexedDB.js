@@ -17,3 +17,17 @@ export const getAddresses = async () => {
 	const db = await dbPromise;
 	return db.getAll("addresses");
 };
+
+export const updateWorkArea = async (id, newWorkArea) => {
+	const db = await dbPromise;
+	const tx = db.transaction('addresses', 'readwrite');
+	const store = tx.objectStore('addresses');
+
+	const address = await store.get(id);
+	if (address) {
+		address.workArea = newWorkArea;
+		await store.put(address)
+	}
+
+	await tx.done;
+}

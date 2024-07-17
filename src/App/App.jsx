@@ -6,7 +6,12 @@ import btn from "../Components/AddButton/AddButton.module.css";
 import AllAddresses from "../Pages/AllAddresses/AllAddresses";
 import InProgress from "../Pages/InProgress/InProgress";
 
+
+
 const App = () => {
+	
+	const setActive = ({ isActive }) => (isActive ? style.activeLink : "");
+
 	return (
 		<>
 			<nav>
@@ -14,7 +19,7 @@ const App = () => {
 					<NavLink
 						to="/add"
 						className={({ isActive }) =>
-							`${btn.btn} ${btn.btn__Nav} ${isActive ? style.activeLink : ""}`
+							`${setActive({ isActive })} ${btn.btn} ${btn.btn__Nav}`
 						}
 					>
 						Добавить адрес
@@ -22,7 +27,7 @@ const App = () => {
 					<NavLink
 						to="/"
 						className={({ isActive }) =>
-							`${btn.btn} ${btn.btn__Nav} ${isActive ? style.activeLink : ""}`
+							`${setActive({ isActive })} ${btn.btn} ${btn.btn__Nav}`
 						}
 					>
 						В работе
@@ -30,7 +35,7 @@ const App = () => {
 					<NavLink
 						to="/all"
 						className={({ isActive }) =>
-							`${btn.btn} ${btn.btn__Nav} ${isActive ? style.activeLink : ""}`
+							`${setActive({ isActive })} ${btn.btn} ${btn.btn__Nav}`
 						}
 					>
 						Все адреса
