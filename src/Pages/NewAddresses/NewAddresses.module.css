@@ -1,4 +1,5 @@
 .form {
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -8,7 +9,7 @@
 label {
 	display: flex;
 	justify-content: space-between;
-  align-items: center;
+	align-items: center;
 }
 
 input {
@@ -23,10 +24,9 @@ input {
 }
 
 .formAddAddress {
-  margin: 0 auto;
-	padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  gap: 20px;
+	margin: 0 auto;
+	padding-top: 110px;
+	display: flex;
+	flex-direction: column;
+	max-width: 800px;
 }

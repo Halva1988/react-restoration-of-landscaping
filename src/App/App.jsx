@@ -15,7 +15,7 @@ const App = () => {
 	return (
 		<>
 			<nav>
-				<ul className={style.nav}>
+				<ul className={style.ul}>
 					<NavLink
 						to="/add"
 						className={({ isActive }) =>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
+import style from './Map.module.css';
 
 export default function Map({ onLocationSelect }) {
 	const [markerPosition, setMarkerPosition] = useState(null);
@@ -26,10 +27,10 @@ export default function Map({ onLocationSelect }) {
 	};
 
 	return (
-		<MapContainer
+		<MapContainer className={style.map}
 			center={[59.997280, 30.262751]}
 			zoom={13}
-			style={{ height: "400px", width: "100%" }}
+      style={{ height: "400px", width: "100%", radius: "20px" }}
 		>
 			<TileLayer
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
