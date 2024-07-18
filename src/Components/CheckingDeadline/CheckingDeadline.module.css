@@ -1,0 +1,11 @@
+.urgently {
+  background: #eb4949 !important;
+}
+
+.faster {
+  background: orange !important;
+}
+
+.completed {
+  background: green !important;
+}
