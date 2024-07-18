@@ -5,6 +5,7 @@ import style from "./App.module.css";
 import btn from "../Components/AddButton/AddButton.module.css";
 import AllAddresses from "../Pages/AllAddresses/AllAddresses";
 import InProgress from "../Pages/InProgress/InProgress";
+import AddressPage from "../Pages/AddressPage/AddressPage";
 
 
 
@@ -46,6 +47,7 @@ const App = () => {
 				<Route path="/add" element={<NewAddresses />} />
 				<Route path="/" element={<InProgress />} />
 				<Route path="/all" element={<AllAddresses />} />
+				<Route path="/addresses/:addressId" element={<AddressPage />} />
 			</Routes>
 		</>
 	);

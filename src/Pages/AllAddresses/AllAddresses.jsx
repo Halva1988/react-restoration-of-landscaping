@@ -31,9 +31,7 @@ const AllAddresses = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {addresses.map((address) => ( */}
 						<CheckingDeadline addresses={addresses}/>
-					{/* ))} */}
 				</tbody>
 			</table>
 		</Wrapper>

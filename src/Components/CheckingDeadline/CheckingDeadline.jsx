@@ -24,7 +24,7 @@ export default function CheckingDeadline({ addresses }) {
 					return (
 						<tr key={address.id} className={`${style[alarmStyle]}`}>
 							<td>
-								<Link to={`/addresses/${address.id}`}>
+                <Link state={{address: address}} to={`/addresses/${address.id}`}>
 									{address.locationAddress}
 								</Link>
 								{address.mapLink && (
