@@ -31,3 +31,17 @@ export const updateWorkArea = async (id, newWorkArea) => {
 
 	await tx.done;
 }
+
+export const updateInProgress = async (id) => {
+	const db = await dbPromise;
+	const tx = db.transaction('addresses', 'readwrite');
+	const store = tx.objectStore('addresses');
+
+	const address = await store.get(id);
+	if (address) {
+		address.inProgress = true;
+		await store.put(address)
+	}
+
+	await tx.done;
+}
