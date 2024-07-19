@@ -5,17 +5,23 @@ import style from "./NewAddresses.module.css";
 import AddButton from "../../Components/AddButton/AddButton";
 import WorkArea from "../../Components/WorkArea/WorkArea";
 import Map from "../../Components/Map/Map";
+import InputNewAddress from "../../Components/Inputs/InputNewAddress/InputNewAddress";
+import InputStartDate from "../../Components/Inputs/InputStartDate/InputStartDate";
 
 const NewAddresses = () => {
 	const [startDate, setStartDate] = useState("");
 	const [workArea, setWorkArea] = useState(1);
-	const [inProgress, setInProgress] = useState(false);
 	const [locationAddress, setLocationAddress] = useState("");
+	const [inProgress, setInProgress] = useState(false);
 	const [mapLink, setMapLink] = useState("");
 	const navigate = useNavigate();
 
-	const handleLocationSelect = ({ address: { road, house_number, city_district }, lat, lon }) => {
-		const locationAddress = [road, house_number, city_district].filter(Boolean).join(', ');
+	const handleLocationSelect = ({
+		address: { road, house_number, city_district },
+		lat,
+		lon,
+	}) => {
+		const locationAddress = [road, house_number, city_district].join(", ");
 		setMapLink(`https://www.google.com/maps?q=${lat},${lon}&z=14`);
 		setLocationAddress(locationAddress);
 	};
@@ -50,7 +56,7 @@ const NewAddresses = () => {
 				console.error(error);
 			}
 		} else {
-			alert("Заполните поля: адрес и дата начала работ"); //!TODO Add error component
+			alert("Заполните поля: адрес и дата начала работ");
 		}
 	};
 
@@ -59,24 +65,14 @@ const NewAddresses = () => {
 			<h1>Добавь новый адрес</h1>
 			<form className={style.form}>
 				<Map onLocationSelect={handleLocationSelect} />
-				<label>
-					<p>Адрес:</p>
-					<input
-						type="text"
-						value={locationAddress}
-						onChange={(e) => setLocationAddress(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					<p>Дата начала работ:</p>
-					<input
-						type="date"
-						value={startDate}
-						onChange={(e) => setStartDate(e.target.value)}
-						required
-					/>
-				</label>
+				<InputNewAddress
+					onChange={(e) => setLocationAddress(e.target.value)}
+					value={locationAddress}
+				/>
+				<InputStartDate
+					onChange={(e) => setStartDate(e.target.value)}
+					value={startDate}
+				/>
 				<WorkArea
 					value={workArea}
 					onChange={(e) => setWorkArea(e.target.value)}

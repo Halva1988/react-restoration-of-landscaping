@@ -1,17 +1,24 @@
 import { useEffect, useState, useCallback } from "react";
 import Wrapper from "../../Components/Wrapper/Wrapper";
-import style from "../AllAddresses/AllAddresses.module.css";
 import { getAddresses } from "../../DB/indexedDB";
 import CheckingDeadline from "../../Components/CheckingDeadline/CheckingDeadline";
 import plug from "/nothing.png";
+import TableAddress from "../../Components/Table/TableAddresses";
+import sortAddresses from "../../Sort/Sort";
 
 const InProgress = () => {
 	const [progress, setProgress] = useState([]);
+	const [sortBy, setSortBy] = useState("startDate");
 
 	const fetchInProgressAddresses = useCallback(async () => {
 		const progress = (await getAddresses()).filter((el) => !el.inProgress);
-		setProgress(progress);
-	}, []);
+		const newSortAddresses = sortAddresses(progress, sortBy);
+		setProgress(newSortAddresses);
+	}, [sortBy]);
+
+	const handleSort = (key) => {
+		setSortBy(key);
+	};
 
 	useEffect(() => {
 		fetchInProgressAddresses();
@@ -20,24 +27,12 @@ const InProgress = () => {
 	return (
 		<Wrapper>
 			<h1>Все адреса</h1>
-			<table className={style.table}>
-				<thead>
-					<tr>
-						<th>Адрес</th>
-						<th>Дата начала работ</th>
-						<th>
-							Площадь работ (м<sup>2</sup>)
-						</th>
-						<th>Выполнение</th>
-					</tr>
-				</thead>
-				<tbody>
-					<CheckingDeadline
-						addresses={progress}
-						onComplete={fetchInProgressAddresses}
-					/>
-				</tbody>
-			</table>
+			<TableAddress handleSort={handleSort}>
+				<CheckingDeadline
+					addresses={progress}
+					onComplete={fetchInProgressAddresses}
+				/>
+			</TableAddress>
 			{progress.length === 0 && <img src={plug} alt="nothing" />}
 		</Wrapper>
 	);
