@@ -1,28 +1,35 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Wrapper from "../../Components/Wrapper/Wrapper";
 import { getAddresses } from "../../DB/indexedDB";
 import CheckingDeadline from "../../Components/CheckingDeadline/CheckingDeadline";
 import plug from "/nothing.png";
 import TableAddress from "../../Components/Table/TableAddresses";
-import sortAddresses from "../../Sort/Sort";
+import {sortAddresses} from "../../Sort/Sort";
 
 const InProgress = () => {
 	const [progress, setProgress] = useState([]);
-	const [sortBy, setSortBy] = useState("startDate");
+  const [sortConfig, setSortConfig] = useState({
+    key: "",
+    direction: "",
+  });
 
-	const fetchInProgressAddresses = useCallback(async () => {
+	const fetchInProgressAddresses = async () => {
 		const progress = (await getAddresses()).filter((el) => !el.inProgress);
-		const newSortAddresses = sortAddresses(progress, sortBy);
-		setProgress(newSortAddresses);
-	}, [sortBy]);
+		setProgress(progress);
+	}
 
 	const handleSort = (key) => {
-		setSortBy(key);
+    const { sortData, newSortConfig } = sortAddresses(progress, key, sortConfig);
+    setProgress(sortData);
+    setSortConfig(newSortConfig)
 	};
 
 	useEffect(() => {
+	}, [progress]);
+
+	useEffect(() => {
 		fetchInProgressAddresses();
-	}, [fetchInProgressAddresses]);
+	}, []);
 
 	return (
 		<Wrapper>
@@ -33,7 +40,9 @@ const InProgress = () => {
 					onComplete={fetchInProgressAddresses}
 				/>
 			</TableAddress>
-			{progress.length === 0 && <img src={plug} alt="nothing" />}
+			{progress.length === 0 && (
+				<img src={plug} alt="nothing" style={{ marginTop: "10px" }} />
+			)}
 		</Wrapper>
 	);
 };

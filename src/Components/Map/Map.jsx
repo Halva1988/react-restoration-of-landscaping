@@ -5,6 +5,7 @@ import style from './Map.module.css';
 
 export default function Map({ onLocationSelect }) {
 	const [markerPosition, setMarkerPosition] = useState(null);
+	console.log("render Map", markerPosition);
 
 	const LocationMarker = () => {
 		useMapEvents({
@@ -17,26 +18,26 @@ export default function Map({ onLocationSelect }) {
 					.then((data) => {
 						onLocationSelect(data);
 					})
-					.catch((error) => console.error('Ошибка: ',error));
+					.catch((error) => console.error('Ошибка: ', error));
 			},
 		});
 
 		return markerPosition === null ? null : (
 			<Marker position={markerPosition}></Marker>
-      );
+		);
 	};
 
 	return (
 		<MapContainer className={style.map}
 			center={[59.997280, 30.262751]}
 			zoom={13}
-      style={{ height: "400px", width: "100%", radius: "20px" }}
+			style={{ height: "400px", width: "100%", radius: "20px" }}
 		>
 			<TileLayer
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			/>
-      <LocationMarker />
+			<LocationMarker />
 		</MapContainer>
 	);
 }

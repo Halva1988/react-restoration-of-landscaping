@@ -1,6 +1,7 @@
 
-const WorkArea = ({value, onChange}) => {
 
+const InputWorkArea = ({ onChange, value }) => {
+console.log("render InputWorkArea");
   return (
     <label>
       <p>Площадь работ (м<sup>2</sup>):</p>
@@ -14,4 +15,4 @@ const WorkArea = ({value, onChange}) => {
   )
 }
 
-export default WorkArea
+export default InputWorkArea

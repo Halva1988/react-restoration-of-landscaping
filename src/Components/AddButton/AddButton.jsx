@@ -1,11 +1,11 @@
+
 import style from './AddButton.module.css';
 
-const AddButton = ({onClick, children, className}) => {
+export default function AddButton ({ onClick, children }) {
+  console.log("render button");
   return (
-    <button className={`${style.btn} ${className ? `${className}` : ''}`} onClick={onClick}>
+    <button className={`${style.btn}`} onClick={onClick}>
       {children}
     </button>
   )
 }
-
-export default AddButton
