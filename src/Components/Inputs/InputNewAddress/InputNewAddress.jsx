@@ -1,7 +1,8 @@
+import { memo } from "react";
 
 
-export default function InputNewAddress({ onChange, value }) {
-console.log("render InputNewAddress");
+export default memo(function InputNewAddress({ onChange, value }) {
+  
   return (
     <label>
       <p>Адрес:</p>
@@ -13,4 +14,4 @@ console.log("render InputNewAddress");
       />
     </label>
   )
-}
+})

@@ -8,8 +8,8 @@ body {
 	min-height: 100vh;
 	background-image: linear-gradient(
 		to bottom right,
-		rgb(88, 186, 239),
-		rgb(184, 38, 189)
+		rgb(237, 236, 205),
+		rgb(100, 5, 151)
 	);
 	background-attachment: fixed;
 }

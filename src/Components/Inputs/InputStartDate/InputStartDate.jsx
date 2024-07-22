@@ -1,7 +1,8 @@
+import { memo } from "react";
 
 
-export default function InputStartDate({ onChange, value }) {
-  console.log("render InputStartDate");
+export default memo(function InputStartDate({ onChange, value }) {
+  
   return (
     <label>
       <p>Дата начала работ:</p>
@@ -13,4 +14,4 @@ export default function InputStartDate({ onChange, value }) {
       />
     </label>
   )
-}
+})

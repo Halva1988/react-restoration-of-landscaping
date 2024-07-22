@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import style from './Map.module.css';
 
-export default function Map({ onLocationSelect }) {
+export default memo(function Map({ onLocationSelect }) {
 	const [markerPosition, setMarkerPosition] = useState(null);
-	console.log("render Map", markerPosition);
 
 	const LocationMarker = () => {
 		useMapEvents({
@@ -41,4 +40,4 @@ export default function Map({ onLocationSelect }) {
 		</MapContainer>
 	);
 }
-
+)

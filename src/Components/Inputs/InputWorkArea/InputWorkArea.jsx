@@ -1,7 +1,8 @@
+import { memo } from "react"
 
 
-const InputWorkArea = ({ onChange, value }) => {
-console.log("render InputWorkArea");
+const InputWorkArea = memo(function InputWorkArea({ onChange, value }) {
+
   return (
     <label>
       <p>Площадь работ (м<sup>2</sup>):</p>
@@ -13,6 +14,6 @@ console.log("render InputWorkArea");
       />
     </label>
   )
-}
+})
 
 export default InputWorkArea

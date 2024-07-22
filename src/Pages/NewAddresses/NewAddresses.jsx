@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { addAddresses } from "../../DB/indexedDB";
 import style from "./NewAddresses.module.css";
@@ -16,21 +16,17 @@ const NewAddresses = () => {
 	const [mapLink, setMapLink] = useState("");
 	const navigate = useNavigate();
 
-	const handleLocationSelect = ({
-		address: { road, house_number, city_district },
-		lat,
-		lon,
-	}) => {
+	const handleLocationSelect = useCallback(({ address: { road, house_number, city_district }, lat, lon }) => {
 		const handleLocationAddress = [road, house_number, city_district].join(", ");
 		setMapLink(`https://www.google.com/maps?q=${lat},${lon}&z=14`);
 		setLocationAddress(handleLocationAddress);
-	};
+	}, [locationAddress]);
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = useCallback(async (e) => {
 		e.preventDefault();
 		const selectedDate = new Date(startDate);
 		const currentDate = new Date();
-
+		
 		if (selectedDate > currentDate) {
 			alert("Дата начала работ не может быть больше текущей даты");
 			return;
@@ -52,12 +48,11 @@ const NewAddresses = () => {
 		} else {
 			alert("Заполните поля: адрес и дата начала работ");
 		}
-	};
-	
-	const onChangeLocationAddress = (e) => setLocationAddress(e.target.value);
-	const onChangeStartDate = (e) => setStartDate(e.target.value);
-	const onChangeWorkArea = (e) => setWorkArea(e.target.value);
+	}, [locationAddress, startDate, workArea]);
 
+	const onChangeLocationAddress = useCallback((e) => setLocationAddress(e.target.value), []);
+	const onChangeStartDate = useCallback((e) => setStartDate(e.target.value), []);
+	const onChangeWorkArea = useCallback((e) => setWorkArea(e.target.value), []);
 
 	return (
 		<div className={style.formAddAddress}>
