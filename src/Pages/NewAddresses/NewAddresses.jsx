@@ -12,46 +12,69 @@ const NewAddresses = () => {
 	const [startDate, setStartDate] = useState("");
 	const [workArea, setWorkArea] = useState(1);
 	const [locationAddress, setLocationAddress] = useState("");
+	const detailedScopeOfWork = {
+		asphalt: '',
+		soil: '',
+		tiles: '',
+		curb: '',
+	};
 	const inProgress = false;
 	const [mapLink, setMapLink] = useState("");
 	const navigate = useNavigate();
 
-	const handleLocationSelect = useCallback(({ address: { road, house_number, city_district }, lat, lon }) => {
-		const handleLocationAddress = [road, house_number, city_district].join(", ");
-		setMapLink(`https://www.google.com/maps?q=${lat},${lon}&z=14`);
-		setLocationAddress(handleLocationAddress);
-	}, [locationAddress]);
+	const handleLocationSelect = useCallback(
+		({ address: { road, house_number, city_district }, lat, lon }) => {
+			const handleLocationAddress = [road, house_number, city_district].join(
+				", "
+			);
+			setMapLink(`https://www.google.com/maps?q=${lat},${lon}&z=14`);
+			setLocationAddress(handleLocationAddress);
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[locationAddress]
+	);
 
-	const handleSubmit = useCallback(async (e) => {
-		e.preventDefault();
-		const selectedDate = new Date(startDate);
-		const currentDate = new Date();
-		
-		if (selectedDate > currentDate) {
-			alert("Дата начала работ не может быть больше текущей даты");
-			return;
-		}
+	const handleSubmit = useCallback(
+		async (e) => {
+			e.preventDefault();
+			const selectedDate = new Date(startDate);
+			const currentDate = new Date();
 
-		if (locationAddress && startDate) {
-			try {
-				await addAddresses({
-					locationAddress,
-					mapLink,
-					startDate,
-					workArea,
-					inProgress,
-				});
-				navigate("/");
-			} catch (error) {
-				console.error(error);
+			if (selectedDate > currentDate) {
+				alert("Дата начала работ не может быть больше текущей даты");
+				return;
 			}
-		} else {
-			alert("Заполните поля: адрес и дата начала работ");
-		}
-	}, [locationAddress, startDate, workArea]);
 
-	const onChangeLocationAddress = useCallback((e) => setLocationAddress(e.target.value), []);
-	const onChangeStartDate = useCallback((e) => setStartDate(e.target.value), []);
+			if (locationAddress && startDate) {
+				try {
+					await addAddresses({
+						locationAddress,
+						mapLink,
+						startDate,
+						workArea,
+						detailedScopeOfWork,
+						inProgress,
+					});
+					navigate("/");
+				} catch (error) {
+					console.error(error);
+				}
+			} else {
+				alert("Заполните поля: адрес и дата начала работ");
+			}
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[locationAddress, startDate, workArea]
+	);
+
+	const onChangeLocationAddress = useCallback(
+		(e) => setLocationAddress(e.target.value),
+		[]
+	);
+	const onChangeStartDate = useCallback(
+		(e) => setStartDate(e.target.value),
+		[]
+	);
 	const onChangeWorkArea = useCallback((e) => setWorkArea(e.target.value), []);
 
 	return (
@@ -63,14 +86,8 @@ const NewAddresses = () => {
 					onChange={onChangeLocationAddress}
 					value={locationAddress}
 				/>
-				<InputStartDate
-					onChange={onChangeStartDate}
-					value={startDate}
-				/>
-				<InputWorkArea
-					onChange={onChangeWorkArea}
-					value={workArea}
-				/>
+				<InputStartDate onChange={onChangeStartDate} value={startDate} />
+				<InputWorkArea onChange={onChangeWorkArea} value={workArea} />
 				<AddButton onClick={handleSubmit}>Добавить адрес</AddButton>
 			</form>
 		</div>

@@ -45,3 +45,20 @@ export const updateInProgress = async (id) => {
 
 	await tx.done;
 }
+
+export const updateDetailedScopeOfWork = async (id, asphalt, soil, tiles, curb) => {
+	const db = await dbPromise;
+	const tx = db.transaction('addresses', 'readwrite');
+	const store = tx.objectStore('addresses');
+
+	const address = await store.get(id);
+	if (address) {
+		address.detailedScopeOfWork.asphalt = asphalt;
+		address.detailedScopeOfWork.soil = soil;
+		address.detailedScopeOfWork.tiles = tiles;
+		address.detailedScopeOfWork.curb = curb;
+		await store.put(address)
+	}
+
+	await tx.done;
+}
