@@ -9,6 +9,6 @@ export default function CompletedButton({ address, onComplete }) {
   }
 
   return (
-    <button onClick={handleInProgress} className={style.btn}>Завершить</button>
+    <button onClick={handleInProgress} className={style.btn}>&#9989;</button>
   )
 }

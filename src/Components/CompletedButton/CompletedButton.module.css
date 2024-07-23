@@ -1,5 +1,6 @@
 .btn {
-  padding: 3px;
+	background: inherit;
+	border: none;
 	position: absolute;
 	top: 2px;
 	right: 2px;

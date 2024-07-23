@@ -7,6 +7,7 @@ import Map from "../../Components/Map/Map";
 import InputNewAddress from "../../Components/Inputs/InputNewAddress/InputNewAddress";
 import InputStartDate from "../../Components/Inputs/InputStartDate/InputStartDate";
 import InputWorkArea from "../../Components/Inputs/InputWorkArea/InputWorkArea";
+import Title from "../../Components/Title/Title";
 
 const NewAddresses = () => {
 	const [startDate, setStartDate] = useState("");
@@ -79,7 +80,7 @@ const NewAddresses = () => {
 
 	return (
 		<div className={style.formAddAddress}>
-			<h1>Добавь новый адрес</h1>
+			<Title title="Добавь новый адрес"/>
 			<form className={style.form}>
 				<Map onLocationSelect={handleLocationSelect} />
 				<InputNewAddress

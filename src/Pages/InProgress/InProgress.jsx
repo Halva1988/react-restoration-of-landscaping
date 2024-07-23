@@ -5,6 +5,7 @@ import CheckingDeadline from "../../Components/CheckingDeadline/CheckingDeadline
 import plug from "/nothing.png";
 import TableAddress from "../../Components/Table/TableAddresses";
 import {sortAddresses} from "../../Sort/Sort";
+import Title from "../../Components/Title/Title";
 
 const InProgress = () => {
 	const [progress, setProgress] = useState([]);
@@ -33,7 +34,7 @@ const InProgress = () => {
 
 	return (
 		<Wrapper>
-			<h1>Все адреса</h1>
+			<Title title="Все адреса"/>
 			<TableAddress handleSort={handleSort}>
 				<CheckingDeadline
 					addresses={progress}

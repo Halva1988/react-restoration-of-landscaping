@@ -5,7 +5,7 @@ import style from './Map.module.css';
 
 export default memo(function Map({ onLocationSelect }) {
 	const [markerPosition, setMarkerPosition] = useState(null);
-
+	
 	const LocationMarker = () => {
 		useMapEvents({
 			click(e) {

@@ -65,7 +65,7 @@
 }
 
 .table tbody td:last-child {
-  vertical-align: bottom;
+  vertical-align: center;
   position: relative;
 }
 
@@ -74,4 +74,13 @@ td a+a {
   margin-top: 5px;
   color: #470134;
   font-size: 14px;
+}
+
+.table tbody tr {
+  will-change: transition;
+  transition: scale 0.25s;
+}
+
+.table tbody tr:hover {
+  scale: 1.015;
 }
