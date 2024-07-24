@@ -19,15 +19,16 @@ const NewAddresses = () => {
 		tiles: '',
 		curb: '',
 	};
+	const photos = [];
 	const inProgress = false;
 	const [mapLink, setMapLink] = useState("");
 	const navigate = useNavigate();
 
 	const handleLocationSelect = useCallback(
 		({ address: { road, house_number, city_district }, lat, lon }) => {
-			const handleLocationAddress = [road, house_number, city_district].join(
+			const handleLocationAddress = house_number ?[road, house_number, city_district].join(
 				", "
-			);
+			) : [road, city_district].join(", ");
 			setMapLink(`https://www.google.com/maps?q=${lat},${lon}&z=14`);
 			setLocationAddress(handleLocationAddress);
 		},
@@ -55,6 +56,7 @@ const NewAddresses = () => {
 						workArea,
 						detailedScopeOfWork,
 						inProgress,
+						photos,
 					});
 					navigate("/");
 				} catch (error) {

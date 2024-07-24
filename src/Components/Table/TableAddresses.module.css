@@ -42,6 +42,7 @@
   padding: 10px 15px;
   font-size: 1.2rem;
   vertical-align: center;
+  border-radius: 8px;
 }
 
 .table tbody tr:nth-child(even) {
@@ -57,11 +58,11 @@
 }
 
 .table tbody tr:last-child td:first-child {
-  border-radius: 0 0 0 20px;
+  border-radius: 8px 8px 8px 20px;
 }
 
 .table tbody tr:last-child td:last-child {
-  border-radius: 0 0 20px 0;
+  border-radius: 8px 8px 20px 8px;
 }
 
 .table tbody td:last-child {
@@ -84,3 +85,11 @@ td a+a {
 .table tbody tr:hover {
   scale: 1.015;
 }
+
+/* table tbody tr:hover td:last-child {
+  border-radius: 8px 8px 8px 8px;
+}
+
+table tbody tr:hover td:first-child {
+  border-radius: 8px 0 0 8px;
+} */
