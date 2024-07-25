@@ -2,13 +2,19 @@ import { useLocation } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Wrapper from "../../Components/Wrapper/Wrapper";
 import ButtonChangeDetailed from "../../Components/ButtonChangeDetailed/ButtonChangeDetailed";
-import { addPhotos, getPhotos, updateDetailedScopeOfWork, updateWorkArea } from "../../DB/indexedDB";
+import {
+	addPhotos,
+	getPhotos,
+	updateDetailedScopeOfWork,
+	updateWorkArea,
+} from "../../DB/indexedDB";
 import Title from "../../Components/Title/Title";
 import style from "./AddressPage.module.css";
 import InputPhoto from "../../Components/Inputs/InputPhoto/InputPhoto";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+
 
 export default function AddressPage() {
 	const location = useLocation();
@@ -43,7 +49,7 @@ export default function AddressPage() {
 		stateSetter(e.target.value);
 	};
 
-	const handleChange = async () => {
+	const handleChange = useCallback(async () => {
 		console.log("6");
 		const asphaltValue = parseInt(asphalt) || 0;
 		const soilValue = parseInt(soil) || 0;
@@ -52,29 +58,33 @@ export default function AddressPage() {
 		pRef.current.innerText = totalArea;
 		await updateWorkArea(address.id, pRef.current.innerText);
 		await updateDetailedScopeOfWork(address.id, asphalt, soil, tiles, curb);
-	};
+	}, [asphalt, soil, tiles, curb, address.id, pRef]);
 
-	const handlePhotosChange = async (photos) => {
-		const photosArray = [];
-		for (let i = 0; i < photos.length; i++) {
-			const file = photos[i];
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onloadend = function () {
-				photosArray.push(reader.result);
-				if (photosArray.length === photos.length) {
-					addPhotos(address.id, photosArray).then(() => {
-						fetchPhotos();
-					});
-				}
-			};
-		}
-	};
+	const handlePhotosChange = useCallback(
+		async (photos) => {
+			const photosArray = [];
+			for (let i = 0; i < photos.length; i++) {
+				const file = photos[i];
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onloadend = function () {
+					photosArray.push(reader.result);
+					if (photosArray.length === photos.length) {
+						addPhotos(address.id, photosArray).then(() => {
+							fetchPhotos();
+						});
+					}
+				};
+			}
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[photos]
+	);
 
 	const fetchPhotos = useCallback(async () => {
 		const photos = await getPhotos(address.id);
 		setPhotos(photos);
-	}, [address.id])
+	}, [address.id]);
 
 	useEffect(() => {
 		fetchPhotos();
@@ -96,46 +106,55 @@ export default function AddressPage() {
 				Общая площадь работ: <span ref={pRef}>{address.workArea}</span> м
 				<sup>2</sup>
 			</h4>
-			<div>
+			<div className={style.detailed}>
 				<ul>
-					<li>
-						Асфальт =
-						<input
-							type="number"
-							value={asphalt}
-							onChange={handleInputChange("asphalt")}
-						/>
-						м<sup>2</sup>
+					<li className={style.li}>
+						Асфальт <div className={style.wrapDiv}> 
+							=
+							<input
+								type="number"
+								value={asphalt}
+								onChange={handleInputChange("asphalt")}
+							/>
+							м<sup>2</sup>
+						</div>
 					</li>
 					{/* асфальт */}
-					<li>
-						Грунт =
-						<input
-							type="number"
-							value={soil}
-							onChange={handleInputChange("soil")}
-						/>
-						м<sup>2</sup>
+					<li className={style.li}>
+						Грунт <div className={style.wrapDiv}> 
+							=
+							<input
+								type="number"
+								value={soil}
+								onChange={handleInputChange("soil")}
+							/>
+							м<sup>2</sup>
+						</div>
 					</li>
 					{/* грунт */}
-					<li>
-						Плитка =
-						<input
-							type="number"
-							value={tiles}
-							onChange={handleInputChange("tiles")}
-						/>
-						м<sup>2</sup>
+					<li className={style.li}>
+						Плитка <div className={style.wrapDiv}> 
+							=
+							<input
+								type="number"
+								value={tiles}
+								onChange={handleInputChange("tiles")}
+							/>
+							м<sup>2</sup>
+						</div>
 					</li>
 					{/* плитка */}
-					<li>
-						Бордюр =
-						<input
-							type="number"
-							value={curb}
-							onChange={handleInputChange("curb")}
-						/>
-						шт.
+					<li className={style.li}>
+						Бордюр 
+						<div className={style.wrapDiv}>
+						=
+							<input
+								type="number"
+								value={curb}
+								onChange={handleInputChange("curb")}
+							/>
+							шт.
+						</div>
 					</li>
 					{/* бордюр */}
 				</ul>
@@ -143,14 +162,14 @@ export default function AddressPage() {
 				<InputPhoto onChange={handlePhotosChange} />
 			</div>
 			{address.mapLink && (
-				<h4>
+				<h4 className={style.linkMap}>
 					<a className={style.link} href={address.mapLink} target="_blank">
 						Показать на карте
 					</a>
 				</h4>
 			)}
 
-			{photos && photos.length > 0 && (
+			{photos.length > 1 ? (
 				<Slider {...sliderSettings} className={style.slider}>
 					{photos.map((photo, index) => (
 						<div key={index}>
@@ -158,6 +177,10 @@ export default function AddressPage() {
 						</div>
 					))}
 				</Slider>
+			) : (photos.length === 1 &&
+				<div className={style.slider}>
+					<img src={photos} alt={"photo"} />
+				</div>
 			)}
 		</Wrapper>
 	);

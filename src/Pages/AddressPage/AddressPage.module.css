@@ -1,4 +1,8 @@
-
+.detailed {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 .dateWork {
 	margin-top: 15px;
@@ -6,6 +10,19 @@
 
 .link {
 	text-decoration: underline;
+}
+
+.li {
+	display: flex;
+	justify-content: space-between;
+}
+
+.li + .li {
+	margin-top: 5px;
+}
+
+.wrapDiv {
+	margin-left: 5px;
 }
 
 .slider {
@@ -16,4 +33,8 @@
 .slider img {
 	width: 100%;
 	height: auto;
+}
+
+.linkMap {
+	margin-top: 10px;
 }

@@ -1,14 +1,22 @@
+import { memo, useState } from "react";
+import style from "./InputPhoto.module.css";
+import btn from "../../ButtonChangeDetailed/ButtonChangeDetailed.module.css"
 
+export default memo(function InputPhoto({ onChange }) {
+  const [files, setFiles] = useState([]);
 
-export default function InputPhoto({onChange}) {
   const handleFileChange = (e) => {
-    const files = e.target.files
+    setFiles(e.target.files)
+  }
+
+  const addFiles = () => {
     onChange(files)
   }
 
   return (
-    <div>
-      <input type="file" multiple onChange={handleFileChange}/>
+    <div className={style.addPhoto}>
+      <input type="file" multiple onChange={handleFileChange} />
+      <button className={`${btn.btn} ${style.btn}`} onClick={addFiles}>Добавить фото</button>
     </div>
   )
-}
+})

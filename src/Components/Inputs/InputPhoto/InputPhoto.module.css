@@ -1,0 +1,26 @@
+.addPhoto {
+	margin-top: 25px;
+}
+
+.btn {
+	width: 110px;
+	height: 30px;
+	margin-left: 10px;
+	display: inline;
+}
+
+input[type="file"]::file-selector-button {
+	--light-blue: #644dff;
+	--blue: #4836bb;
+	cursor: pointer;
+	width: 150px;
+	height: 30px;
+	color: #fff;
+	background: var(--light-blue);
+	border: 2px solid var(--blue);
+	border-radius: 0.75rem;
+}
+
+input[type="file"]::file-selector-button:hover {
+	background: #5842ea;
+}

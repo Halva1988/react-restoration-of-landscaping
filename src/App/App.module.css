@@ -15,6 +15,7 @@ nav {
 }
 
 .activeLink {
+	z-index: 99;
 	color: #090808;
 	background: radial-gradient(100% 100% at 100% 0%, #e97b36 0%, #d15b12 100%);
 	box-shadow: 0px 2px 4px rgba(66, 61, 35, 0.4),
