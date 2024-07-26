@@ -2,15 +2,15 @@ import { memo, useState } from "react";
 import style from "./InputPhoto.module.css";
 import btn from "../../ButtonChangeDetailed/ButtonChangeDetailed.module.css"
 
-export default memo(function InputPhoto({ onChange }) {
+export default memo(function InputPhoto({ add }) {
   const [files, setFiles] = useState([]);
-
+  
   const handleFileChange = (e) => {
     setFiles(e.target.files)
   }
-
+  
   const addFiles = () => {
-    onChange(files)
+    add(files)
   }
 
   return (

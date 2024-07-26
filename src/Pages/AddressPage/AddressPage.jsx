@@ -11,10 +11,10 @@ import {
 import Title from "../../Components/Title/Title";
 import style from "./AddressPage.module.css";
 import InputPhoto from "../../Components/Inputs/InputPhoto/InputPhoto";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
+import LiWorkArea from "../../Components/LiWorkArea/LiWorkArea";
+import ShowPhoto from "../../Components/ShowPhoto/ShowPhoto";
+import TitleDateWork from "../../Components/TitleDateWork/TitleDateWork";
+import ShowOnMap from "../../Components/ShowOnMap/ShowOnMap";
 
 export default function AddressPage() {
 	const location = useLocation();
@@ -27,18 +27,9 @@ export default function AddressPage() {
 	const [curb, setCurb] = useState(detailed.curb);
 	const [photos, setPhotos] = useState([]);
 
-	const pRef = useRef();
-
-	const option = {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	};
-
-	const date = new Date(address.startDate).toLocaleString("ru", option);
+	const spanRef = useRef();
 
 	const handleInputChange = (key) => (e) => {
-		console.log("5");
 		const stateSetter = {
 			asphalt: setAsphalt,
 			soil: setSoil,
@@ -49,18 +40,19 @@ export default function AddressPage() {
 		stateSetter(e.target.value);
 	};
 
-	const handleChange = useCallback(async () => {
-		console.log("6");
+
+	const handleWorkAreaChange = useCallback(async () => {
 		const asphaltValue = parseInt(asphalt) || 0;
 		const soilValue = parseInt(soil) || 0;
 		const tilesValue = parseInt(tiles) || 0;
 		const totalArea = asphaltValue + soilValue + tilesValue;
-		pRef.current.innerText = totalArea;
-		await updateWorkArea(address.id, pRef.current.innerText);
+		spanRef.current.innerText = totalArea;
+		await updateWorkArea(address.id, spanRef.current.innerText);
 		await updateDetailedScopeOfWork(address.id, asphalt, soil, tiles, curb);
-	}, [asphalt, soil, tiles, curb, address.id, pRef]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [asphalt, soil, tiles, curb, spanRef]);
 
-	const handlePhotosChange = useCallback(
+	const handlePhotosAdd = useCallback(
 		async (photos) => {
 			const photosArray = [];
 			for (let i = 0; i < photos.length; i++) {
@@ -70,7 +62,8 @@ export default function AddressPage() {
 				reader.onloadend = function () {
 					photosArray.push(reader.result);
 					if (photosArray.length === photos.length) {
-						addPhotos(address.id, photosArray).then(() => {
+						addPhotos(address.id, photosArray)
+						.then(() => {
 							fetchPhotos();
 						});
 					}
@@ -90,64 +83,42 @@ export default function AddressPage() {
 		fetchPhotos();
 	}, [fetchPhotos]);
 
-	const sliderSettings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-	};
-
 	return (
 		<Wrapper className={style.wrapper}>
 			<Title title={address.locationAddress} />
-			<h3 className={style.dateWork}>Дата начала работ: {date}</h3>
+			<TitleDateWork style={style} startDate={address.startDate} />
 			<h4>
-				Общая площадь работ: <span ref={pRef}>{address.workArea}</span> м
+				Общая площадь работ: <span ref={spanRef}>{address.workArea}</span> м
 				<sup>2</sup>
 			</h4>
 			<div className={style.detailed}>
 				<ul>
-					<li className={style.li}>
-						Асфальт <div className={style.wrapDiv}> 
-							=
-							<input
-								type="number"
-								value={asphalt}
-								onChange={handleInputChange("asphalt")}
-							/>
-							м<sup>2</sup>
-						</div>
-					</li>
 					{/* асфальт */}
-					<li className={style.li}>
-						Грунт <div className={style.wrapDiv}> 
-							=
-							<input
-								type="number"
-								value={soil}
-								onChange={handleInputChange("soil")}
-							/>
-							м<sup>2</sup>
-						</div>
-					</li>
+					<LiWorkArea
+						handleInputChange={handleInputChange}
+						style={style}
+						work={asphalt}
+						title="asphalt"
+					/>
 					{/* грунт */}
-					<li className={style.li}>
-						Плитка <div className={style.wrapDiv}> 
-							=
-							<input
-								type="number"
-								value={tiles}
-								onChange={handleInputChange("tiles")}
-							/>
-							м<sup>2</sup>
-						</div>
-					</li>
+					<LiWorkArea
+						handleInputChange={handleInputChange}
+						style={style}
+						work={soil}
+						title="soil"
+					/>
 					{/* плитка */}
+					<LiWorkArea
+						handleInputChange={handleInputChange}
+						style={style}
+						work={tiles}
+						title="tiles"
+					/>
+					{/* бордюр */}
 					<li className={style.li}>
-						Бордюр 
+						Бордюр
 						<div className={style.wrapDiv}>
-						=
+							=
 							<input
 								type="number"
 								value={curb}
@@ -156,32 +127,12 @@ export default function AddressPage() {
 							шт.
 						</div>
 					</li>
-					{/* бордюр */}
 				</ul>
-				<ButtonChangeDetailed onClick={handleChange} />
-				<InputPhoto onChange={handlePhotosChange} />
+				<ButtonChangeDetailed onClick={handleWorkAreaChange} />
+				<InputPhoto add={handlePhotosAdd} />
 			</div>
-			{address.mapLink && (
-				<h4 className={style.linkMap}>
-					<a className={style.link} href={address.mapLink} target="_blank">
-						Показать на карте
-					</a>
-				</h4>
-			)}
-
-			{photos.length > 1 ? (
-				<Slider {...sliderSettings} className={style.slider}>
-					{photos.map((photo, index) => (
-						<div key={index}>
-							<img src={photo} alt={`photo-${index}`} />
-						</div>
-					))}
-				</Slider>
-			) : (photos.length === 1 &&
-				<div className={style.slider}>
-					<img src={photos} alt={"photo"} />
-				</div>
-			)}
+			<ShowOnMap link={address.mapLink} style={style} />
+			<ShowPhoto photos={photos} style={style} />
 		</Wrapper>
 	);
 }

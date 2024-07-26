@@ -7,15 +7,9 @@
 	border-radius: 8px;
 	text-shadow: 2px 3px 6px #5b672e;
 	padding: 5px 10px;
-	transition: scale 0.5s
 }
 
 .input::placeholder {
   color: rgba(0, 0, 0, 0.495);
   padding-left: 10px;
-}
-
-.input:focus {
-	transition: scale 0.5s;
-	scale: 1.015;
 }
