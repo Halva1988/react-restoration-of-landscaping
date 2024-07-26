@@ -1,0 +1,19 @@
+.tooltip {
+	position: absolute;
+	background: white;
+	color: black;
+	font-family: cursive;
+	font-size: 14px;
+	right: -85px;
+	top: 0;
+	padding: 0 5px;
+	border-radius: 8px;
+	box-shadow: 2px 2px 20px 1px #88ef09;
+}
+
+@media screen and (max-width: 1200px) {
+	.tooltip {
+    right: 30px;
+    top: 5px;
+	}
+}
