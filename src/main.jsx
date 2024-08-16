@@ -6,7 +6,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename="/react-restoration-of-landscaping">
 			<App />
 		</BrowserRouter>
 	</StrictMode>

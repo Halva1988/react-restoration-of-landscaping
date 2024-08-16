@@ -34,7 +34,7 @@ const InProgress = () => {
 
 	return (
 		<Wrapper>
-			<Title title="Все адреса"/>
+			<Title title="Адреса в работе"/>
 			<TableAddress handleSort={handleSort}>
 				<CheckingDeadline
 					addresses={progress}
