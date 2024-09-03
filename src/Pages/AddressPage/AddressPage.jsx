@@ -99,6 +99,7 @@ export default function AddressPage() {
 						style={style}
 						work={asphalt}
 						title="asphalt"
+						name="Асфальт"
 					/>
 					{/* грунт */}
 					<LiWorkArea
@@ -106,6 +107,7 @@ export default function AddressPage() {
 						style={style}
 						work={soil}
 						title="soil"
+						name="Грунт"
 					/>
 					{/* плитка */}
 					<LiWorkArea
@@ -113,6 +115,7 @@ export default function AddressPage() {
 						style={style}
 						work={tiles}
 						title="tiles"
+						name="Плитка"
 					/>
 					{/* бордюр */}
 					<li className={style.li}>

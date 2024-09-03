@@ -1,10 +1,10 @@
 
-export default function LiWorkArea({ handleInputChange, style, work, title }) {
+export default function LiWorkArea({ handleInputChange, style, work, title, name }) {
 
   
   return (
     <li className={style.li}>
-      Асфальт <div className={style.wrapDiv}>
+      {name} <div className={style.wrapDiv}>
         =
         <input
           type="number"
